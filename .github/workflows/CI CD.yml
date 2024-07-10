@@ -25,3 +25,7 @@ jobs:
         docker build -t zeeshankhan299/react-app:latest .
         docker login -u zeeshankhan299 -p ${{ secrets.DOCKER_PASSWORD }}
         docker push zeeshankhan299/react-app:latest
+    
+    # - name: Deploy to staging
+    #         run: |
+    #           ssh user@staging-server 'docker pull yourdockerhubusername/react-app:latest && docker-compose -f docker-compose.staging.yml up -d'

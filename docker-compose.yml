@@ -9,3 +9,33 @@ services:
       - '3000:3000'
     environment:
       - NODE_ENV=development
+
+  mock-api:
+    image: typicode/json-server
+    ports:
+      - '8000:3000'  # Map port 8000 on host to port 3000 in container
+    volumes:
+      - './mock-api/db.json:/data/db.json'  # Mount your JSON data file
+  
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - '9090:9090'
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    depends_on:
+      - app  # Depends on the app service to ensure metrics are available
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - '3000:3000'
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin  # Change as needed
+    volumes:
+      - grafana-storage:/var/lib/grafana
+    depends_on:
+      - prometheus  # Depends on Prometheus to use as data source
+
+volumes:
+  grafana-storage:
