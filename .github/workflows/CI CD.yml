@@ -1,0 +1,27 @@
+# /.github/workflows/main.yml
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Lint and test React code
+      run: npm run lint && npm test
+
+    # - name: Build Docker image
+    #   run: |
+    #     docker build -t zeeshankhan299/react-app:latest .
+    #     docker login -u zeeshankhan299 -p ${{ secrets.DOCKER_PASSWORD }}
+    #     docker push zeeshankhan299/react-app:latest
