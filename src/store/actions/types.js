@@ -1,0 +1,10 @@
+export const ADD_USER = 'ADD_USER';
+export const FETCH_USER = 'FETCH_USER';
+export const FETCH_USERS = 'FETCH_USERS';
+export const FETCH_USERS_START = 'FETCH_USERS_START';
+export const RECEIVE_USERS = 'RECEIVE_USERS';
+export const FETCH_USERS_ERROR = 'FETCH_USERS_ERROR';
+
+export const FETCH_USER_FULFILLED = 'FETCH_USER_FULFILLED';
+export const SET_USER_NAME = 'SET_USER_NAME';
+export const SET_USER_USERNAME = 'SET_USER_USERNAME';
