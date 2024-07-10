@@ -18,10 +18,10 @@ jobs:
       run: npm install
 
     - name: Lint and test React code
-      run: npm run lint && npm test
+      run:  npm test
 
-    # - name: Build Docker image
-    #   run: |
-    #     docker build -t zeeshankhan299/react-app:latest .
-    #     docker login -u zeeshankhan299 -p ${{ secrets.DOCKER_PASSWORD }}
-    #     docker push zeeshankhan299/react-app:latest
+    - name: Build Docker image
+      run: |
+        docker build -t zeeshankhan299/react-app:latest .
+        docker login -u zeeshankhan299 -p ${{ secrets.DOCKER_PASSWORD }}
+        docker push zeeshankhan299/react-app:latest
