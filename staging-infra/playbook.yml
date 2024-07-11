@@ -1,0 +1,35 @@
+---
+- name: Configure EC2 instance
+  hosts: web
+  become: true
+  tasks:
+    - name: Update and install Nginx
+      yum:
+        name: nginx
+        state: present
+
+    - name: Start and enable Nginx
+      systemd:
+        name: nginx
+        state: started
+        enabled: true
+
+    - name: Deploy custom HTML page
+      copy:
+        content: "Hello, World!"
+        dest: /usr/share/nginx/html/index.html
+        owner: nginx
+        group: nginx
+        mode: '0644'
+
+    - name: Ensure Nginx configuration is correct
+      lineinfile:
+        path: /etc/nginx/nginx.conf
+        regexp: '^\\s*server_tokens\\s*.*'
+        line: 'server_tokens off;'
+        state: present
+
+    - name: Reload Nginx
+      systemd:
+        name: nginx
+        state: reloaded
